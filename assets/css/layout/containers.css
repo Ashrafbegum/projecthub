@@ -1,0 +1,22 @@
+/* containers.css */
+.container {
+  width: 100%;
+  padding: var(--space-3);
+}
+
+/* 📟 Tablet */
+@media (min-width: 768px) {
+  .container {
+    padding: var(--space-4);
+    max-width: 720px;
+    margin: auto;
+  }
+}
+
+/* 💻 Desktop */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
