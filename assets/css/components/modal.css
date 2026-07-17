@@ -1,45 +1,20 @@
-.modal{
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
 
-    display:none;
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,.4);
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:1rem;
+    justify-content: center;
+    align-items: center;
 }
 
-.modal--show{
-
-    display:flex;
+.modal.active {
+    display: flex;
 }
 
-.modal__content{
-
-    width:100%;
-
-    max-width:420px;
-
-    background:#fff;
-
-    border-radius:var(--radius-lg);
-
-    padding:2rem;
-}
-
-.modal__actions{
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    gap:1rem;
-
-    margin-top:1.5rem;
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 300px;
 }
