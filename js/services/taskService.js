@@ -1,21 +1,29 @@
-import { state } from "../core/state.js";
-import { mockDB } from "../data/mock-db.js";
+import { store } from "../core/store.js";
+import { db } from "../storage/localStorageDB.js";
 
-export function loadTasks() {
-  state.tasks = [...mockDB.tasks];
+function updateStorage(tasks) {
+  db.saveTasks(tasks);
+  store.setState({ tasks });
 }
 
-export function filterTasks(filters) {
-  return state.tasks.filter((t) => {
-    const matchStatus = filters.status === "all" || t.status === filters.status;
+export function addTask(task) {
+  const newTask = {
+    id: Date.now(),
+    ...task,
+  };
 
-    const matchPriority =
-      filters.priority === "all" || t.priority === filters.priority;
+  updateStorage([...store.state.tasks, newTask]);
+}
 
-    const matchSearch = t.title
-      .toLowerCase()
-      .includes(filters.search.toLowerCase());
+export function deleteTask(id) {
+  const updated = store.state.tasks.filter((t) => t.id !== id);
+  updateStorage(updated);
+}
 
-    return matchStatus && matchPriority && matchSearch;
-  });
+export function updateTaskStatus(id, status) {
+  const updated = store.state.tasks.map((t) =>
+    t.id === id ? { ...t, status } : t,
+  );
+
+  updateStorage(updated);
 }
