@@ -20,7 +20,7 @@ export function deleteTask(id) {
   updateStorage(updated);
 }
 
-export function updateTaskStatus(id, status) {
+export function editTask(id, status) {
   const updated = store.state.tasks.map((t) =>
     t.id === id ? { ...t, status } : t,
   );

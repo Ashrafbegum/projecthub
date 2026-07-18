@@ -1,22 +1,17 @@
-import { projects } from "../data/dummy-data.js";
+import { store } from "../core/state.js";
+import { renderProjects } from "../ui/renderProjects.js";
+import { createSearch } from "../utils/search.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderProjects();
+  const input = document.querySelector(".input");
+
+  createSearch(input, (value) => {
+    const filtered = store.state.projects.filter((p) =>
+      p.title.toLowerCase().includes(value.toLowerCase()),
+    );
+
+    store.setState({ projects: filtered });
+
+    renderProjects();
+  });
 });
-
-function renderProjects() {
-  const container = document.querySelector(".projects-grid");
-
-  if (!container) return;
-
-  container.innerHTML = projects
-    .map(
-      (p) => `
-        <div class="project-card">
-            <h3>${p.title}</h3>
-            <p>${p.status}</p>
-        </div>
-    `,
-    )
-    .join("");
-}

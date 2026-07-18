@@ -1,11 +1,9 @@
-import { addProject, editProject } from "../services/projectService.js";
+import { addTask, editTask } from "../services/taskService.js";
 import { closeModal } from "./modal.js";
 
-let editMode = false;
-
-export function initProjectForm() {
-  const form = document.querySelector("#projectForm");
-  const editForm = document.querySelector("#editProjectForm");
+export function initTaskForm() {
+  const form = document.querySelector("#taskForm");
+  const editForm = document.querySelector("#editTaskForm");
 
   if (form) {
     form.addEventListener("submit", (e) => {
@@ -13,13 +11,15 @@ export function initProjectForm() {
 
       const data = new FormData(form);
 
-      addProject({
+      addTask({
         title: data.get("title"),
         status: data.get("status"),
+        priority: data.get("priority"),
+        owner: data.get("owner"),
       });
 
       form.reset();
-      closeModal("#projectModal");
+      closeModal("#taskModal");
     });
   }
 
@@ -29,12 +29,13 @@ export function initProjectForm() {
 
       const data = new FormData(editForm);
 
-      editProject(Number(data.get("id")), {
+      editTask(Number(data.get("id")), {
         title: data.get("title"),
         status: data.get("status"),
+        priority: data.get("priority"),
       });
 
-      closeModal("#editProjectModal");
+      closeModal("#editTaskModal");
     });
   }
 }

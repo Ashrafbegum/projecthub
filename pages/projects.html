@@ -167,6 +167,36 @@
 
 </div>
 
+    <!-- ADD EDIT MODAL -->
+
+ <div class="modal" id="editProjectModal">
+
+    <div class="modal-content">
+
+        <button class="modal-close">X</button>
+
+        <h2>Edit Project</h2>
+
+        <form id="editProjectForm">
+
+            <input type="hidden" name="id">
+
+            <input type="text" name="title" placeholder="Project Title" required>
+
+            <select name="status">
+                <option>Active</option>
+                <option>In Progress</option>
+                <option>Completed</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+
+        </form>
+
+    </div>
+
+</div>
+
 <script src="../js/pages/projects.js"></script>
 </body>
 

@@ -1,5 +1,6 @@
 import { store } from "../core/store.js";
 import { db } from "../storage/localStorageDB.js";
+import { showToast } from "../components/toast.js";
 
 function updateStorage(projects) {
   db.saveProjects(projects);
@@ -20,6 +21,7 @@ export function addProject(project) {
 export function deleteProject(id) {
   const updated = store.state.projects.filter((p) => p.id !== id);
   updateStorage(updated);
+  showToast("Project deleted");
 }
 
 export function updateProject(id, updatedData) {
@@ -28,4 +30,14 @@ export function updateProject(id, updatedData) {
   );
 
   updateStorage(updated);
+}
+
+
+export function editProject(id, data) {
+    const updated = store.state.projects.map(p =>
+        p.id === id ? { ...p, ...data } : p
+    );
+
+    db.saveProjects(updated);
+    store.setState({ projects: updated });
 }
